@@ -1,2 +1,5 @@
 ﻿  main.cpp
+C:\Users\Suyeon\Desktop\새 폴더\CPlusPlusStudy\220618 textrpg\TextRPG\TextRPG\main.cpp(100,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Suyeon\Desktop\새 폴더\CPlusPlusStudy\220618 textrpg\TextRPG\TextRPG\main.cpp(369,17): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Suyeon\Desktop\새 폴더\CPlusPlusStudy\220618 textrpg\TextRPG\TextRPG\main.cpp(370,18): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   TextRPG.vcxproj -> C:\Users\Suyeon\Desktop\새 폴더\CPlusPlusStudy\220618 textrpg\TextRPG\x64\Debug\TextRPG.exe
