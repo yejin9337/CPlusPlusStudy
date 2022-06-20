@@ -1,0 +1,122 @@
+#include "forwardlist.h"
+
+ForwardList::ForwardList()
+{
+	// _head ->[]
+	// 
+	// _end -> []
+
+	// [] -> []
+	_head->Next = _end;
+}
+
+int& ForwardList::front()
+{
+	return *begin();
+}
+
+const int& ForwardList::front() const
+{
+	return *begin();
+}
+
+ForwardList::iterator ForwardList::before_begin()
+{
+	return  _head;
+}
+
+ForwardList::const_iterator ForwardList::before_begin() const
+{
+	return _head;
+}
+
+ForwardList::iterator ForwardList::begin()
+{
+	return  _head->Next;
+}
+
+ForwardList::const_iterator ForwardList::begin() const
+{
+	return  _head->Next;
+}
+
+ForwardList::iterator ForwardList::end()
+{
+	return  _end;
+}
+
+ForwardList::const_iterator ForwardList::end() const
+{
+	return  _end;
+}
+
+void ForwardList::push_front(int value)
+{
+	insert_after(before_begin(), value);
+}
+
+void ForwardList::pop_front()
+{
+	erase_after(before_begin());
+}
+
+bool ForwardList::empty() const
+{
+	if (begin() == end())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void ForwardList::clear()
+{
+	while (false == empty())
+	{
+		pop_front();
+	}
+}
+
+bool ForwardList::contains(int value) const
+{
+	for (const_iterator iter = begin(); iter != end(); ++iter)
+	{
+		if (*iter == value)
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+ForwardList::iterator ForwardList::insert_after(const_iterator pos, int value)
+{
+	Node* newNode = new Node(value);
+	Node* where = pos._p;
+
+	newNode->Next = where->Next;
+	where->Next = newNode;
+
+	return newNode;
+}
+
+ForwardList::iterator ForwardList::erase_after(const_iterator pos)
+{
+	if (empty())
+	{
+		return end();
+	}
+
+	Node* where = pos._p;
+	Node* removed = where->Next;
+
+	where->Next = removed->Next;
+	removed->Next = nullptr;
+
+	return removed;
+}
+
