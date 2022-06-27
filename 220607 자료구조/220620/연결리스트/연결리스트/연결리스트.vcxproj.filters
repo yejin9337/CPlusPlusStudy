@@ -30,6 +30,9 @@
     <ClCompile Include="큐.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="이진검색.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="forwardlist.h">

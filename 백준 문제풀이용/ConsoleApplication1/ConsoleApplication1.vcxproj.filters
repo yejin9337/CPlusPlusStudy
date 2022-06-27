@@ -51,7 +51,16 @@
     <ClCompile Include="요세푸스 문제 0.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="덱.cpp">
+    <ClCompile Include="수 찾기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="랜선 자르기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="나무 자르기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DFS와 BFS.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
