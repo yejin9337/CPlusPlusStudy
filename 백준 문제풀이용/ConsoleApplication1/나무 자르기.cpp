@@ -24,7 +24,7 @@ int main()
 	}
 
 	long long start = 1, end = max + 1;
-	long long temp = max;
+	long long temp = 0;
 	long long middle = 0;
 
 	while (start < end)
@@ -34,25 +34,17 @@ int main()
 
 		for (long long i = 0; i < treeNum; i++)
 		{
-			if (tree[i] <= middle)
-			{
-			}
-			else
+			if (tree[i] > middle)
 			{
 				result += tree[i] - middle;
 			}
 		}
 
-
-		if (result == useTree)
+		if (result >= useTree)
 		{
-			break;
-		}
-		else if (result > useTree)
-		{
-			if (temp > result)
+			if (temp < middle)
 			{
-				temp = result;
+				temp = middle;
 			}
 			start = middle + 1;
 		}
@@ -62,5 +54,5 @@ int main()
 		}
 	}
 
-	cout <<middle;
+	cout << temp;
 }
