@@ -6,35 +6,43 @@
 using namespace std;
 
 vector<int> graph[1001];
+	bool isVisited[1001] = { false };
 int N, M, V;
 
-void dfs()
+void dfs(int V)
 {
 	// 1. 방문 여부 저장
-	bool isVisited[1001] = { false };
 
-	// 2. DFS에 사용할 스택을 만든다.
-	stack<int> st;  // 스택에 앞으로 방문할 정점이 저장된다
-	st.push(V); // 첫 번째로 방문할 정점
-	isVisited[V] = true;
+	//// 2. DFS에 사용할 스택을 만든다.
+	//stack<int> st;  // 스택에 앞으로 방문할 정점이 저장된다
+	//st.push(V); // 첫 번째로 방문할 정점
 
-	while (st.empty() == false) //스택이 비었다면 모든 정점을 방문한 것
+	//while (st.empty() == false) //스택이 비었다면 모든 정점을 방문한 것
+	//{
+	//	// 3-1. 정점을 방문한다
+	//	int node = st.top();
+	//	st.pop();
+	//	cout << node << ' ';
+
+	//	// 3-2. 다음으로 방문할 정점을 찾는다
+	//	for (int nextNode : graph[node])
+	//	{
+	//		if (isVisited[nextNode] == false)
+	//		{
+	//			st.push(nextNode);
+	//			isVisited[nextNode] = true;
+
+	//		}
+	//	}
+			isVisited[V] = true;
+			cout << V << ' ';
+	for (int next : graph[V])
 	{
-		// 3-1. 정점을 방문한다
-		int node = st.top();
-		st.pop();
-		cout << node << ' ';
-
-		// 3-2. 다음으로 방문할 정점을 찾는다
-		for (int nextNode : graph[node])
+		if (isVisited[next] == false)
 		{
-			if (isVisited[nextNode] == false)
-			{
-				st.push(nextNode);
-				isVisited[nextNode] = true;
-			}
+			dfs(next);
 		}
-
+			
 	}
 }
 
@@ -92,4 +100,7 @@ int main()
 	}
 
 	// 3. DFS
+	dfs(V);
+	cout << "\n";
+	bfs();
 }
