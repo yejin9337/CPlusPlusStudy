@@ -1,4 +1,6 @@
 #include "Set.h"
+#include <iostream>
+#include <queue>
 
 Set::Node::Node(int data, Node* parent, Node* left, Node* right)
 	:Data(data), Parent(parent), Left(left), Right(right)
@@ -34,95 +36,140 @@ size_t Set::size() const
 	return _size;
 }
 
-std::pair<Set::Node*, bool> Set::insert(int value)
+bool Set::insert(int value)
 {
-	if (empty())
+	// 새 노드 만들고
+	Node* newNode = new Node(value);
+
+	// 만약 루트 노드가 없다면
+	if (_head->Parent == nullptr)
 	{
-		_root = new Node(value);
+		_head->Parent = newNode;
+		newNode->Parent = _head;
 		++_size;
 
-		return std::make_pair(_root, true);
+		return true;
 	}
 
-	// 이진 검색 트리 : 왼쪽 서브 트리는 자신보다 작은 값. 오른쪽 서브트리는 자신보다 큰 값
-	Node* currentNode = _root;
-	Node* prevNode = nullptr;
+	// 부모노드 찾기
+	Node* parent = nullptr;
+	Node* p = _head->Parent;
 
-	while (currentNode)
+	while (p)
 	{
-		prevNode = currentNode;
+		parent = p;
 
-		// 이진 검색 수행
-		if (currentNode->Data == value)
-			return std::make_pair(currentNode, false);
-		else if (currentNode->Data < value)
-			currentNode = currentNode->Right;
+		if (p->Data == value)
+		{
+			return false;
+		}
+		else if (value < p->Data)
+		{
+			p = p->Left;
+		}
 		else
-			currentNode = currentNode->Left;
-		// 같은 값이라면 해당 값을 가리키는 노드의 false 반환
+		{
+			p = p->Right;
+		}
 	}
-	currentNode = new Node(value, prevNode);
-
-		//
-	if (prevNode->Data < value)
-		prevNode->Right = currentNode;
-	else
-		prevNode->Left = currentNode;
-
-	++_size;
-	return std::make_pair(currentNode, true);
-}
-
-void Set::erase(Node* pos)
-{
-	// 1. pos가 루트 노드라면?
-	if (pos->Parent == nullptr)
+	
+	//3. 찾은 부모노드 아래에 새로운 노드 삽입
+	if (value < parent->Data)
 	{
-		//1-1 자식이 없다면?
-		if (pos->IsLeaf())
-		{
-			_root = nullptr;
-			delete pos;
-			pos = nullptr;
-
-			--_size;
-			return;
-		}
-
-		//1-2 왼쪽 자식만 있다면?
-		if (pos->Right == nullptr)
-		{
-			_root = pos->Left;
-			_root->Parent = nullptr;
-			delete pos;
-			pos = nullptr;
-
-			--_size;
-			return;
-		}
-		
-		//1-3 오른쪽 자식만 있다면?
-		if (pos->Left == nullptr)
-		{
-			_root = pos->Right;
-			_root->Parent = nullptr;
-			delete pos;
-			pos = nullptr;
-
-			--_size;
-			return;
-		}
-
-		//1-4 둘 다 있다면
-		if ()
+		parent->Left = newNode;
 	}
+	else
+	{
+		parent->Right = newNode;
+	}
+	newNode->Parent = parent;
+	++_size;
 
-	// 2. pos가 리프 노드라면?
+	return true;
+}
 
-	// 3. pos가 왼쪽 자식만 있다면?
+void Set::erase(int value)
+{
+	
+}
 
-	// 4. pos가 오른쪽 자식만 있다면?
 
-	// 5. pos가 자식을 둘 다 가지고 있다면?
+
+Set::Node* Set::find(int value) const
+{
+	Node* result = _head->Parent;
+	while (result)
+	{
+		if (result->Data == value)
+		{
+			break;
+		}
+		else if (result->Data < value)
+		{
+			result = result->Right;
+		}
+		else
+		{
+			result = result->Left;
+		}
+	}
+}
+
+void Set::traverseByPreorder() const
+{
+	traverseByPreorderHelper(_head->Parent);
+}
+
+void Set::traverseByPreorderHelper(Node* node) const
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+	std::cout << node->Data << "->";
+	traverseByPreorderHelper(node->Left);
+	traverseByPreorderHelper(node->Right);
+}
+
+void Set::traverseByInorder() const
+{
+	traverseByInorderHelper(_head->Parent);
+}
+
+void Set::traverseByInorderHelper(Node* node) const
+{
 
 }
+
+void Set::traverseByPostorder() const
+{
+	traverseByPostorderHelper(_head->Parent);
+}
+
+
+void Set::traverseByPostorderHelper(Node* node) const
+{
+
+}
+
+void Set::traverseByLevelorder() const
+{
+	Node* node = _head->Parent;
+	std::queue<Node*> qu;
+	qu.push(node);
+
+	while (qu.empty() == false)
+	{
+		Node* node = qu.front();
+		qu.pop();
+
+		std::cout << node->Data << "->";
+		if (node->Left)
+		{
+			qu.push();
+		}
+	}
+
+}
+
+

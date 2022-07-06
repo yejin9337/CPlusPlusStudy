@@ -75,6 +75,18 @@
     <ClCompile Include="76번 토마토.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="손익분기점.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="벌집.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="분수찾기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="달팽이는 올라가고 싶다.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="소스.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
